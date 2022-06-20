@@ -163,6 +163,9 @@ public class Bank {
         resetNumOfDimes();
         resetNumOfNickles();
     }
+    public void resetChangeProvided() {
+        changeProvided = BigDecimal.ZERO;
+    }
 
     public void generateSalesReport() {
         File salesReport = new File(dtf.format(LocalDateTime.now()) + "_Sales_Report.txt");
