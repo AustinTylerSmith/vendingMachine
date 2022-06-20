@@ -29,9 +29,9 @@ public class Bank {
     private final BigDecimal DIME = new BigDecimal("0.10");
     private final BigDecimal NICKEL = new BigDecimal("0.05");
 
-    private int numberOfQuarters;
-    private int numberOfDimes;
-    private int numberOfNickels;
+    private int numberOfQuarters = 0;
+    private int numberOfDimes = 0;
+    private int numberOfNickels = 0;
 
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm");
 
@@ -82,6 +82,8 @@ public class Bank {
                 writer.println(dtf.format(LocalDateTime.now()) + " FEED MONEY:" + " $" + moneyToAdd + " $" + currentMoneyProvided);
             } catch (IOException e) {
                 System.out.println("File not found");
+            } catch (NumberFormatException nfe) {
+                System.out.println("Enter a monetary value please");
             }
         } else {
             throw new AddMoneyException();
@@ -142,6 +144,24 @@ public class Bank {
             System.out.println("File not found");
         }
         return changeProvided.toString();
+
+    }
+
+    public void resetNumOfQuarters() {
+        numberOfQuarters = 0;
+    }
+
+    public void resetNumOfDimes() {
+        numberOfDimes = 0;
+    }
+    public void resetNumOfNickles() {
+        numberOfNickels = 0;
+    }
+
+    public void resetAllChange() {
+        resetNumOfQuarters();
+        resetNumOfDimes();
+        resetNumOfNickles();
     }
 
     public void generateSalesReport() {

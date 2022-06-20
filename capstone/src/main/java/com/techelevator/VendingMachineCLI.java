@@ -45,6 +45,8 @@ public class VendingMachineCLI {
                             bank.addMoney(new BigDecimal(moneyToAddString));
                         } catch (AddMoneyException nMe) {
                             System.out.println("This machine doesn't stock pennies. You need to add a positive amount of money that is divisible by at least a nickel.");
+                        } catch (NumberFormatException nfe) {
+                            System.out.println("Please enter a monetary value");
                         }
                     } else if (purchaseMenuUserInput.equalsIgnoreCase("2")) {
                         for (Map.Entry<String, Product> entrySet : bank.getPurchaseInventory().getInventoryMap().entrySet()) {
@@ -69,6 +71,7 @@ public class VendingMachineCLI {
                         bank.giveChange();
                         System.out.printf("You received %d quarters, %d dimes, and %d nickels, totaling $%s in change.\n \n",
                                 bank.getNumberOfQuarters(), bank.getNumberOfDimes(), bank.getNumberOfNickels(), bank.getChangeProvided().toString());
+                                bank.resetAllChange();
                         break;
                     }
                 }
